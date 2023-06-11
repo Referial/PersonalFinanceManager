@@ -13,8 +13,11 @@ import static org.example.ServerSocket.HOST;
 import static org.example.ServerSocket.PORT;
 
 public class ClientPersonalFinanceManager {
+    protected static int cycle = 0;
 
     public static void main(String[] args) {
+
+        AuxiliaryСlasses auxiliaryСlasses = new AuxiliaryСlasses();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -26,9 +29,12 @@ public class ClientPersonalFinanceManager {
             writer.println(scanner.nextLine());
             System.out.println(reader.readLine());
 
-            while (true) {
+            int x = 0;
 
-                System.out.println("Выберите: \n" + "1. Добавить покупку. \n" + "2. Выйти из приложения.");
+            while (x == 0) {
+
+                System.out.println("Выберите: \n" + "1. Добавить покупку. \n" + "2. Посмотреть наибольшите расходы. \n"
+                        + "3. Выйти из приложения.");
                 int action = scanner.nextInt();
                 String ac = Integer.toString(action);
                 writer.println(ac);
@@ -43,8 +49,7 @@ public class ClientPersonalFinanceManager {
 
                         System.out.println("Введите через пробел: Название продукта, дата покупки в формате - год.месяц.число " +
                                 "и сумму покупки.");
-//                String line = scanner.nextLine();
-                        String line = "Сыр 2022.12.22 200";
+                        String line = scanner.nextLine();
                         String[] parts = line.split(" ");
 
                         if (parts.length == 3) {
@@ -52,7 +57,7 @@ public class ClientPersonalFinanceManager {
                             part2 = parts[1]; //Дата
                             part3 = parts[2]; //Сумма
 
-                            boolean chek = CheckingTheInput.check(part2, part3, parts);
+                            boolean chek = AuxiliaryСlasses.checkingTheEnteredData(part2, part3, parts);
 
                             if (chek == true) {
                                 file.put("title", part1);
@@ -60,7 +65,6 @@ public class ClientPersonalFinanceManager {
                                 file.put("sum", part3);
 
                                 String strJson = file.toString();
-                                System.out.println(strJson);
 
                                 writer.println(String.format(strJson));
                             }
@@ -69,7 +73,14 @@ public class ClientPersonalFinanceManager {
                         }
                         break;
                     case 2:
-                        System.out.println("все заеьись 2");
+                        System.out.println(reader.readLine());
+                        System.out.println(reader.readLine());
+                        System.out.println(reader.readLine());
+                        System.out.println(reader.readLine());
+                        break;
+                    case 3:
+                        System.out.println("Сервер закончил работу.");
+                        x++;
                         break;
                     default:
                         System.out.println(reader.readLine());
