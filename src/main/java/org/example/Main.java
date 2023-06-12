@@ -1,24 +1,18 @@
 package org.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
 
-public class ServerPersonalFinanceManager {
-
-    protected static String CANN = "Некоректный ввод.";
-
+public class Main {
     public static void main(String[] args) {
-        try (ServerSocket server = new ServerSocket(org.example.ServerSocket.PORT)) {
+        try (java.net.ServerSocket server = new java.net.ServerSocket(org.example.ServerSocket.PORT)) {
             System.out.println("Сервер производит запуск: \n" + "Loading…  ██████████ 100%\n" + "Сервер запущен.");
 
             AuxiliaryСlasses auxiliaryСlasses = new AuxiliaryСlasses();
