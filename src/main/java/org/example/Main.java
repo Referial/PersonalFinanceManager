@@ -13,46 +13,30 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         try (java.net.ServerSocket server = new java.net.ServerSocket(org.example.ServerSocket.PORT)) {
-            System.out.println("Сервер производит запуск: \n" + "Loading…  ██████████ 100%\n" + "Сервер запущен.");
+            System.out.println("Сервер запущен.");
 
             AuxiliaryСlasses auxiliaryСlasses = new AuxiliaryСlasses();
             AuxiliaryСlasses.parsingTheDataTable();
 
-            try (Socket socket = server.accept(); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
 
-                final String name = in.readLine();
-                System.out.println("Зарегестрировался пользователь: " + name);
-                out.println(String.format("Привет %s, твой порт %d", name, socket.getPort()));
+            while (true) {
 
-                int x = 0;
+                try (Socket socket = server.accept();
+                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
 
-                while (x == 0) {
-                    int actionInt = Integer.parseInt(in.readLine());
+                    String LineJson = in.readLine();
 
-                    switch (actionInt) {
-                        case 1:
-                            String LineJson = in.readLine();
+                    ObjectMapper mapper = new ObjectMapper();
+                    Map<String, String> map = mapper.readValue(LineJson, Map.class);
 
-                            ObjectMapper mapper = new ObjectMapper();
-                            Map<String, String> map = mapper.readValue(LineJson, Map.class);
+                    String product = map.get("title");
+                    String date = map.get("date");
+                    Integer sum = Integer.parseInt(map.get("sum"));
 
-                            String product = map.get("title");
-                            String date = map.get("date");
-                            Integer sum = Integer.parseInt(map.get("sum"));
+                    auxiliaryСlasses.addingToTheShoppingList(product, date, sum);
 
-                            auxiliaryСlasses.addingToTheShoppingList(product, date, sum);
-                            break;
-                        case 2:
-                            out.println(auxiliaryСlasses.arrayСategory());
-                            break;
-                        case 3:
-                            System.out.println("Сервер закончил свою работу.");
-                            x++;
-                            break;
-                        default:
-                            out.println("Некоректный ввод.");
-                            break;
-                    }
+                    out.println(auxiliaryСlasses.arrayСategory());
                 }
             }
         } catch (IOException e) {
