@@ -14,6 +14,9 @@ public class AuxiliaryСlasses {
     protected static String other = "другое";
     protected static Map<String, String> productCategory = new HashMap<>();
     protected static Map<String, Integer> priceCategory = new HashMap<>();
+    public static boolean strinNumber (String in){
+        return in.matches(regex);
+    }
 
     protected static int realTimeYear() {
         LocalDate current_date = LocalDate.now();

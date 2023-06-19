@@ -32,10 +32,12 @@ public class Main {
 
                     String product = map.get("title");
                     String date = map.get("date");
-                    Integer sum = Integer.parseInt(map.get("sum"));
+                    String su = map.get("sum");
 
-                    auxiliaryСlasses.addingToTheShoppingList(product, date, sum);
-
+                    if (auxiliaryСlasses.strinNumber(su) == true){
+                        Integer sum = Integer.parseInt(su);
+                        auxiliaryСlasses.addingToTheShoppingList(product, date, sum);
+                    }
                     out.println(auxiliaryСlasses.arrayСategory());
                 }
             }
