@@ -10,13 +10,9 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class AuxiliaryСlasses {
-    protected static String regex = "[0-9]+";
     protected static String other = "другое";
     protected static Map<String, String> productCategory = new HashMap<>();
     protected static Map<String, Integer> priceCategory = new HashMap<>();
-    public static boolean strinNumber (String in){
-        return in.matches(regex);
-    }
 
     protected static int realTimeYear() {
         LocalDate current_date = LocalDate.now();
@@ -36,11 +32,10 @@ public class AuxiliaryСlasses {
         return day;
     }
 
-    public static boolean checkingTheEnteredData(String part2, String part3, String[] parts) {
+    public static boolean checkingTheEnteredData(String part2, Integer part3, String[] parts) {
 
         String[] data = part2.split("\\.");
 
-        boolean checkSum = part3.matches(regex);
         boolean checkNumberOfObjects = parts.length == 3;
         boolean checkNumberOfData = data.length == 3;
         boolean checkData = false;
@@ -57,7 +52,7 @@ public class AuxiliaryСlasses {
             }
         }
 
-        if (checkSum == true && checkNumberOfObjects == true && checkNumberOfData == true && checkData == true) {
+        if (checkNumberOfObjects == true && checkNumberOfData == true && checkData == true) {
             return true;
         } else {
             return false;

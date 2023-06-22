@@ -25,7 +25,7 @@ public class ClientPersonalFinanceManager {
 
             String part1;
             String part2;
-            String part3;
+            Integer part3;
 
             System.out.println("Введите через пробел: Название продукта, дата покупки в формате - год.месяц.число " +
                     "и сумму покупки.");
@@ -35,7 +35,7 @@ public class ClientPersonalFinanceManager {
             if (parts.length == 3) {
                 part1 = parts[0]; //Название товара
                 part2 = parts[1]; //Дата
-                part3 = parts[2]; //Сумма
+                part3 = Integer.valueOf(parts[2]); //Сумма
 
                 boolean chek = AuxiliaryСlasses.checkingTheEnteredData(part2, part3, parts);
 

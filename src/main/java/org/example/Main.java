@@ -28,16 +28,13 @@ public class Main {
                     String LineJson = in.readLine();
 
                     ObjectMapper mapper = new ObjectMapper();
-                    Map<String, String> map = mapper.readValue(LineJson, Map.class);
+                    Map<String, Object> map = mapper.readValue(LineJson, Map.class);
 
-                    String product = map.get("title");
-                    String date = map.get("date");
-                    String su = map.get("sum");
-
-                    if (auxiliaryСlasses.strinNumber(su) == true){
-                        Integer sum = Integer.parseInt(su);
-                        auxiliaryСlasses.addingToTheShoppingList(product, date, sum);
-                    }
+                    String product = (String) map.get("title");
+                    String date = (String) map.get("date");
+                    Integer sum = (Integer) map.get("sum");
+                    
+                    auxiliaryСlasses.addingToTheShoppingList(product, date, sum);
                     out.println(auxiliaryСlasses.arrayСategory());
                 }
             }
