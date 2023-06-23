@@ -1,5 +1,7 @@
 package org.example;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
@@ -123,7 +125,6 @@ public class AuxiliaryСlasses {
 
     public static String arrayСategory() throws IOException {
         String row;
-        String ret = "";
 
         Map<String, Integer> MaxCat = new HashMap<>();
         Map<String, Integer> MaxYearCat = new HashMap<>();
@@ -180,66 +181,28 @@ public class AuxiliaryСlasses {
         }
         csvReader.close();
 
-        ret = maxCategory(MaxCat) + "\n" + maxYear(MaxYearCat) + "\n" + maxMonth(MaxMonthCat) + "\n"
-        + maxDay(MaxDayCat);
-        System.out.println(ret);
-        return ret;
-    }
-
-    public static String maxYear(Map<String, Integer> priceCa) {
-
         JSONObject conclusion = new JSONObject();
-        JSONObject conclusionMax = new JSONObject();
+        JSONObject conclusionMaxYear = new JSONObject();
+        JSONObject conclusionMaxMonth = new JSONObject();
+        JSONObject conclusionMaxDay = new JSONObject();
+        JSONObject conclusionMaxCategory = new JSONObject();
 
-        conclusionMax.put("category", maximumValueCategory(priceCa));
-        conclusionMax.put("sum", priceCa.get(maximumValueCategory(priceCa)));
+        conclusionMaxYear.put("category", maximumValueCategory(MaxYearCat));
+        conclusionMaxYear.put("sum", MaxYearCat.get(maximumValueCategory(MaxYearCat)));
 
-        conclusion.put("maxYearCategory", conclusionMax);
+        conclusionMaxMonth.put("category", maximumValueCategory(MaxMonthCat));
+        conclusionMaxMonth.put("sum", MaxMonthCat.get(maximumValueCategory(MaxMonthCat)));
 
-        String ret = conclusion.toString();
+        conclusionMaxDay.put("category", maximumValueCategory(MaxDayCat));
+        conclusionMaxDay.put("sum", MaxDayCat.get(maximumValueCategory(MaxDayCat)));
 
-        return ret;
-    }
+        conclusionMaxCategory.put("category", maximumValueCategory(MaxCat));
+        conclusionMaxCategory.put("sum", MaxCat.get(maximumValueCategory(MaxCat)));
 
-    public static String maxMonth(Map<String, Integer> priceCa) {
-
-        JSONObject conclusion = new JSONObject();
-        JSONObject conclusionMax = new JSONObject();
-
-        conclusionMax.put("category", maximumValueCategory(priceCa));
-        conclusionMax.put("sum", priceCa.get(maximumValueCategory(priceCa)));
-
-        conclusion.put("maxMonthCategory", conclusionMax);
-
-        String ret = conclusion.toString();
-
-        return ret;
-    }
-
-    public static String maxDay(Map<String, Integer> priceCa) {
-
-        JSONObject conclusion = new JSONObject();
-        JSONObject conclusionMax = new JSONObject();
-
-        conclusionMax.put("category", maximumValueCategory(priceCa));
-        conclusionMax.put("sum", priceCa.get(maximumValueCategory(priceCa)));
-
-        conclusion.put("maxDayCategory", conclusionMax);
-
-        String ret = conclusion.toString();
-
-        return ret;
-    }
-
-    public static String maxCategory(Map<String, Integer> priceCa) {
-
-        JSONObject conclusion = new JSONObject();
-        JSONObject conclusionMax = new JSONObject();
-
-        conclusionMax.put("category", maximumValueCategory(priceCa));
-        conclusionMax.put("sum", priceCa.get(maximumValueCategory(priceCa)));
-
-        conclusion.put("maxCategory", conclusionMax);
+        conclusion.put("maxYearCategory", conclusionMaxYear);
+        conclusion.put("maxMonthCategory", conclusionMaxMonth);
+        conclusion.put("maxDayCategory", conclusionMaxDay);
+        conclusion.put("maxCategory", conclusionMaxCategory);
 
         String ret = conclusion.toString();
 

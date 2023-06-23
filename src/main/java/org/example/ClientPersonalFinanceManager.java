@@ -1,5 +1,6 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 
 import java.io.BufferedReader;
@@ -51,10 +52,13 @@ public class ClientPersonalFinanceManager {
             } else {
                 System.out.println("Некоректный ввод.");
             }
-            System.out.println(reader.readLine());
-            System.out.println(reader.readLine());
-            System.out.println(reader.readLine());
-            System.out.println(reader.readLine());
+
+            String s = reader.readLine();
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            Object json = mapper.readValue(s, Object.class);
+            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
